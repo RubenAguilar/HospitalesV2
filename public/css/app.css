@@ -1,0 +1,57 @@
+/* LAYOUT */
+.IC{
+    background-image: url("../img/hospital-fachada.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.RC{
+    background-image: url(https://static.vecteezy.com/system/resources/previews/002/783/363/non_2x/blur-hospital-background-free-photo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:#eae8dc;
+}
+
+footer{
+    position:relative;
+    padding-bottom: 0%;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: #0e3746;
+    color: #eae8dc;
+    
+}
+/* HOME */
+.mainHome{
+    padding-top: 4rem;
+    display: grid;
+    place-items: center;
+    
+ }
+ .card-groupH{
+    height: 35vh;
+    width: 70vw;
+    margin: 5rem;
+}
+.imagenCarta{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    width: 10vw;
+    height: 10vh;
+}
+.card-text{
+ text-align: justify;
+}
+ /* FIN HOME */
+
+/* CONTACTO */
+.Ccontacto{
+    padding-top: 4rem;
+    
+
+}
+.cartaC{
+    padding: 3rem;
+    height: 60vh;
+}
+/* FIN CONTACTO */
