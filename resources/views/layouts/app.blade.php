@@ -37,10 +37,13 @@
                         
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('Citas.index') }}">{{ __('Citas') }}</a>
+                            <a class="nav-link" href="{{ route('cita.index') }}">{{ __('Citas') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('recetas.index') }}">{{ __('Recetas') }}</a>
+                            <a class="nav-link" href="{{ route('receta.index') }}">{{ __('Recetas') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('medicamento.index') }}">{{ __('Medicamentos') }}</a>
                         </li>
                         @endif
                         

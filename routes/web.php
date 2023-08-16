@@ -22,8 +22,8 @@ Route::post('/change/password',  [UserSettingsController::class,'changePassword'
 Route::delete('/destroy',  [UserSettingsController::class,'destroy'])->name('destroy');
 
 
-Route::resource('/Citas', \App\Http\Controllers\CitaController::class)->middleware('auth');
-Route::resource('/recetas', \App\Http\Controllers\RecetaController::class)->middleware('auth');
+Route::resource('/cita', \App\Http\Controllers\CitaController::class)->middleware('auth');
+ Route::resource('/receta', \App\Http\Controllers\RecetaController::class)->middleware('auth');
 Route::resource('/medicamento', \App\Http\Controllers\MedicamentoController::class)->middleware('auth');
 // fin Rutas 
 

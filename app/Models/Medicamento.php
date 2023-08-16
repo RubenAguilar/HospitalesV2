@@ -21,9 +21,9 @@ class Medicamento extends Model
 {
     
     static $rules = [
-		'Nombre_medicamento' => 'required',
+		'Nombre_medicamento' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
 		'gramaje' => 'required',
-		'tipo_med' => 'required',
+		'tipo_med' => 'required|regex:/^[a-zA-Z\s]+$/u|max:100',
     ];
 
     protected $perPage = 20;

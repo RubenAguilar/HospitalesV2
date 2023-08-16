@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $receta->name ?? "{{ __('Show') Receta" }}
+    {{ $cita->name ?? "{{ __('Show') Cita" }}
 @endsection
 
 @section('content')
@@ -11,22 +11,22 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Receta</span>
+                            <span class="card-title">{{ __('Show') }} Cita</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('recetas.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('cita.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Cita Id:</strong>
-                            {{ $receta->cita_id }}
+                            <strong>Paciente Id:</strong>
+                            {{ $cita->paciente_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Tratamiento:</strong>
-                            {{ $receta->tratamiento }}
+                            <strong>Fechahora:</strong>
+                            {{ $cita->FechaHora }}
                         </div>
 
                     </div>

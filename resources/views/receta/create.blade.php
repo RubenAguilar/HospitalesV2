@@ -13,19 +13,18 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        
                         <div class="float-left">
                             <span class="card-title">{{ __('Crear') }} Receta</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('recetas.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('receta.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('recetas.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('receta.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" class="form-control @error('Preceta_id') is-invalid @enderror" name="Preceta_id" value="{{ auth()->user()->id }}" >
-                            @include('recetas.form')
+
+                            @include('receta.form')
 
                         </form>
                     </div>
@@ -34,3 +33,4 @@
         </div>
     </section>
 @endsection
+

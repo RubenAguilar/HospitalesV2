@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Citas', function (Blueprint $table) {
+        Schema::create('citas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('paciente_id')->unsigned();
-            $table->foreign('paciente_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('Fecha');
-            
+            $table->unsignedBigInteger('paciente_id');
+            $table->dateTime('FechaHora')->unique();
+            $table->foreign("paciente_id")
+            ->references("id")
+            ->on("users")
+            ->onDelete("cascade")
+            ->onUpdate("cascade");
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Citas');
+        Schema::dropIfExists('citas');
     }
 };

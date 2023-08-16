@@ -99,7 +99,7 @@
 
             <div class="row text-center mb-4 mt-5">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" id="formSubmit">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary" id="formSubmit"> Cambios</button>
                     <a href="/Perfil" class="btn btn-secondary">Cancelar</a>
                 </div>
             </div>

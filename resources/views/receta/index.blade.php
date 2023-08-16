@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Medicamento
+    Receta
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Medicamento') }}
+                                {{ __('Receta') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('medicamento.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Agregar Medicamento') }}
+                                <a href="{{ route('receta.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -36,39 +36,48 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Nombre Medicamento</th>
-										<th>Gramaje</th>
-										<th>Tipo Med</th>
+										<th>Cita Id</th>
+										<th>Tratamiento</th>
+                                        <th>Tratamiento</th>
+                                        <th>Tratamiento</th>
+                                        <th>Tratamiento</th>
+                            			<th>Tratamiento</th>
+                                        <th>Opciones</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($medicamentos as $medicamento)
+                                    @foreach ($recetas as $receta)
+                                    @if ($receta->cita->user->id == Auth::user()->id)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $medicamento->Nombre_medicamento }}</td>
-											<td>{{ $medicamento->gramaje }}</td>
-											<td>{{ $medicamento->tipo_med }}</td>
+											<td>{{ $receta->cita_id }}</td>
+											<td>{{ $receta->Tratamiento1 }}</td>
+                                            <td>{{ $receta->Tratamiento2 }}</td>
+                                            <td>{{ $receta->Tratamiento3 }}</td>
+                                            <td>{{ $receta->Tratamiento4 }}</td>
+                                            <td>{{ $receta->Tratamiento5 }}</td>
 
                                             <td>
-                                                <form action="{{ route('medicamento.destroy',$medicamento->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('medicamento.show',$medicamento->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('medicamento.edit',$medicamento->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('receta.destroy',$receta->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('receta.show',$receta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('receta.edit',$receta->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                {!! $medicamentos->links() !!}
+                {!! $recetas->links() !!}
             </div>
         </div>
     </div>

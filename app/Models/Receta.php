@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $cita_id
- * @property $tratamiento
+ * @property $Tratamiento1
+ * @property $Tratamiento2
+ * @property $Tratamiento3
+ * @property $Tratamiento4
+ * @property $Tratamiento5
  * @property $created_at
  * @property $updated_at
  *
@@ -22,8 +26,13 @@ class Receta extends Model
     
     static $rules = [
 		'cita_id' => 'required',
-    'Preceta_id'=>'required',
-		'tratamiento' => 'required',
+		'Tratamiento1' => 'required|max:100',
+    'Tratamiento2' => 'required|max:100',
+    'Tratamiento3' => 'required|max:100',
+    'Tratamiento4' => 'required|max:100',
+    'Tratamiento5' => 'required|max:5',
+
+   
     ];
 
     protected $perPage = 20;
@@ -33,7 +42,7 @@ class Receta extends Model
      *
      * @var array
      */
-    protected $fillable = ['cita_id','Preceta_id','tratamiento'];
+    protected $fillable = ['cita_id','Tratamiento1','Tratamiento2','Tratamiento3','Tratamiento4', 'Tratamiento5'];
 
 
     /**
@@ -41,7 +50,7 @@ class Receta extends Model
      */
     public function cita()
     {
-        return $this->hasOne('App\Models\Cita', 'id', 'cita_id','Preceta_id');
+        return $this->hasOne('App\Models\Cita', 'id', 'cita_id');
     }
     
 

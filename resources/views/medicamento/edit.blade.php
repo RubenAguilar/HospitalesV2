@@ -13,7 +13,12 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Medicamento</span>
+                        <div class="float-left">
+                            <span class="card-title">{{ __('Editar') }} Medicamento</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-primary" href="{{ route('medicamento.index') }}"> {{ __('Atras') }}</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('medicamento.update', $medicamento->id) }}"  role="form" enctype="multipart/form-data">

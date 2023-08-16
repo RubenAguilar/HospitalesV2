@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('cita_id')->unsigned();
-            $table->foreign('cita_id')->references('id')->on('Citas')->onDelete('cascade');
-            $table->bigInteger('Preceta_id')->unsigned();
-            $table->foreign('Preceta_id')->references('paciente_id')->on('Citas')->onDelete('cascade');
-            $table->string('tratamiento');
+            $table->unsignedBigInteger('cita_id');
+            $table->string('Tratamiento1');
+            $table->string('Tratamiento2');
+            $table->string('Tratamiento3');
+            $table->string('Tratamiento4');
+            $table->string('Tratamiento5');
+            $table->foreign("cita_id")
+            ->references("id")
+            ->on("citas")
+            ->onDelete("cascade");
+            
             $table->timestamps();
         });
     }

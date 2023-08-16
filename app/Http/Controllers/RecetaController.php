@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Receta;
-use App\Models\Cita;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
 
 /**
  * Class RecetaController
@@ -21,26 +18,10 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        $idPaciente = User::find('id');
-        $user = Auth::user()->id;
-        $idCita = Cita::find('paciente_id');
-        $receta = Receta::find('id');
-        $recetaPaciente = Cita::pluck('paciente_id');
-       $FeCita = Cita::pluck('Fecha');
-    
-            
-                
-            $recetas = Receta::paginate();
+        $recetas = Receta::paginate();
 
-            return view('recetas.index', compact('recetas','idCita','FeCita'))
-                ->with('i', (request()->input('page', 1) - 1) * $recetas->perPage());
-            
-            
-        
-       
-    
-   
-       
+        return view('receta.index', compact('recetas'))
+            ->with('i', (request()->input('page', 1) - 1) * $recetas->perPage());
     }
 
     /**
@@ -50,9 +31,8 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        $receta = new Receta();
-        
-        return view('recetas.create', compact('receta'));
+        $recetas = new Receta();
+        return view('receta.create', compact('recetas'));
     }
 
     /**
@@ -65,9 +45,16 @@ class RecetaController extends Controller
     {
         request()->validate(Receta::$rules);
 
-        $receta = Receta::create($request->all());
+        $recetas = receta::create($request->all());
+        $recetas->Tratamiento1=$request->input('Tratamiento1');
+        $recetas->Tratamiento2=$request->input('Tratamiento2');
+        $recetas->Tratamiento3=$request->input('Tratamiento3');
+        $recetas->Tratamiento4=$request->input('Tratamiento4');
+        $recetas->Tratamiento5=$request->input('Tratamiento5');
 
-        return redirect()->route('recetas.index')
+        
+
+        return redirect()->route('receta.index')
             ->with('success', 'Receta created successfully.');
     }
 
@@ -79,9 +66,9 @@ class RecetaController extends Controller
      */
     public function show($id)
     {
-        $receta = Receta::find($id);
+        $recetas = Receta::find($id);
 
-        return view('recetas.show', compact('receta'));
+        return view('receta.show', compact('recetas'));
     }
 
     /**
@@ -92,9 +79,9 @@ class RecetaController extends Controller
      */
     public function edit($id)
     {
-        $receta = Receta::find($id);
+        $recetas = Receta::find($id);
 
-        return view('recetas.edit', compact('receta'));
+        return view('receta.edit', compact('recetas'));
     }
 
     /**
@@ -104,14 +91,22 @@ class RecetaController extends Controller
      * @param  Receta $receta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Receta $receta)
+    public function update(Request $request, $id)
     {
-        request()->validate(Receta::$rules);
 
-        $receta->update($request->all());
 
-        return redirect()->route('recetas.index')
+        $recetas=receta::find($id);
+        $recetas->Tratamiento1=$request->input('Tratamiento1');
+        $recetas->Tratamiento2=$request->input('Tratamiento2');
+        $recetas->Tratamiento3=$request->input('Tratamiento3');
+        $recetas->Tratamiento4=$request->input('Tratamiento4');
+        $recetas->Tratamiento5=$request->input('Tratamiento5');
+        $recetas->save();
+
+        return redirect()->route('receta.index')
             ->with('success', 'Receta updated successfully');
+
+
     }
 
     /**
@@ -121,9 +116,9 @@ class RecetaController extends Controller
      */
     public function destroy($id)
     {
-        $receta = Receta::find($id)->delete();
+        $recetas = Receta::find($id)->delete();
 
-        return redirect()->route('recetas.index')
+        return redirect()->route('receta.index')
             ->with('success', 'Receta deleted successfully');
     }
 }

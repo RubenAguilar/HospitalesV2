@@ -13,20 +13,19 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        
                         <div class="float-left">
-                            <span class="card-title">{{ __('Update') }} Receta</span>
+                            <span class="card-title">{{ __('Editar') }} Receta</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('recetas.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('receta.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('recetas.update', $receta->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('receta.update', $recetas->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('recetas.form')
+                            @include('receta.form')
 
                         </form>
                     </div>

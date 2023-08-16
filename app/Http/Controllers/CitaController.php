@@ -2,157 +2,108 @@
 
 namespace App\Http\Controllers;
 
-//import Model "Post
 use App\Models\Cita;
-use App\Models\User;
-
 use Illuminate\Http\Request;
 
-//return type View
-use Illuminate\View\View;
-
-//return type redirectResponse
-use Illuminate\Http\RedirectResponse;
-
-//import Facade "Storage"
-use Illuminate\Support\Facades\Storage;
-
+/**
+ * Class CitaController
+ * @package App\Http\Controllers
+ */
 class CitaController extends Controller
-{    
+{
     /**
-     * index
+     * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index()
     {
-        //get posts
-        $VCitas = Cita::latest()->paginate(5);
-        
-        //render view with posts
-        return view('Citas.index', compact('VCitas'));
+        $citas = Cita::paginate();
+
+        return view('cita.index', compact('citas'))
+            ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
 
     /**
-     * create
+     * Show the form for creating a new resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
-    public function create(): View
+    public function create()
     {
-        return view('Citas.create');
-    }
- 
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        //validate form
-        $this->validate($request, [
-            'paciente_id' => 'required',
-            'Fecha' => 'required|unique:Citas,Fecha,|min:5'
-            
-        ]);
-
-        //upload image
-        // $image = $request->file('image');
-        // $image->storeAs('public/Citas', $image->hashName());
-
-        //create post
-        Cita::create([
-            'paciente_id' => $request->paciente_id,
-            'Fecha' => $request->Fecha
-           
-        ]);
-
-        //redirect to index
-        return redirect()->route('Citas.index')->with(['success' => 'Los datos se han guardado!']);
-    }
-    
-    /**
-     * show
-     *
-     * @param  mixed $id
-     * @return View
-     */
-    public function show(string $id): View
-    {
-        //get post by ID
-        $post = Cita::findOrFail($id);
-
-        //render view with post
-        return view('Citas.show', compact('post'));
+        $cita = new Cita();
+        return view('cita.create', compact('cita'));
     }
 
     /**
-     * edit
+     * Store a newly created resource in storage.
      *
-     * @param  mixed $id
-     * @return void
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
-    public function edit(string $id): View
+    public function store(Request $request)
     {
-        //get post by ID
-        $post = Cita::findOrFail($id);
+        request()->validate(Cita::$rules);
 
-        //render view with post
-        return view('Citas.edit', compact('post'));
-    }
-        
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $id
-     * @return RedirectResponse
-     */
-    public function update(Request $request, $id): RedirectResponse
-    {
-        //validate form
-        $this->validate($request, [
-           'paciente_id' => 'required',
-            'Fecha'     => 'required|min:5'
-            
-        ]);
+        $cita = Cita::create($request->all());
 
-        //get post by ID
-        $post = Cita::findOrFail($id);
-
-
-            //update post without image
-            $post->update([
-                'paciente_id' => $request->paciente_id,
-                'Fecha'     => $request->Fecha,
-                
-            ]);
-        
-
-        //redirect to index
-        return redirect()->route('Citas.index')->with(['success' => 'Se actualizaron los datos!']);
+        return redirect()->route('cita.index')
+            ->with('success', 'Cita created successfully.');
     }
 
     /**
-     * destroy
+     * Display the specified resource.
      *
-     * @param  mixed $post
-     * @return void
+     * @param  int $id
+     * @return \Illuminate\Http\Response
      */
-    public function destroy($id): RedirectResponse
+    public function show($id)
     {
-        //get post by ID
-        $post = Cita::findOrFail($id);
+        $cita = Cita::find($id);
 
-        //delete image
-       
+        return view('cita.show', compact('cita'));
+    }
 
-        //delete post
-        $post->delete();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $cita = Cita::find($id);
 
-        //redirect to index
-        return redirect()->route('Citas.index')->with(['success' => 'Se ha eliminado el registro!']);
+        return view('cita.edit', compact('cita'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Cita $cita
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+       $citas=cita::find($id);
+        $citas->FechaHora=$request->input('FechaHora');
+        $citas->save();
+
+        return redirect()->route('cita.index')
+            ->with('success', 'Cita updated successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $cita = Cita::find($id)->delete();
+
+        return redirect()->route('cita.index')
+            ->with('success', 'Cita deleted successfully');
     }
 }
